@@ -1,0 +1,385 @@
+/* Import Google Font: Inter */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* Minimalist aesthetic inspired by yeezy.com */
+:root {
+  --bg: #ffffff;
+  --fg: #000000;
+  --accent: #000000;
+  --maxw: 1200px;
+  --pad: 24px;
+  --track: 0.05em; /* smaller letter spacing */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  text-rendering: optimizeLegibility;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+/* White header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #ffffff;
+}
+
+/* Centered nav wrapper */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(12px, 1.8vw, 20px) var(--pad);
+  gap: 24px;
+}
+
+.brand {
+  display: inline-block;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.brand-logo {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+/* Nav toggle button */
+.nav-toggle {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: var(--fg);
+  cursor: pointer;
+}
+
+/* Nav list hidden by default */
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: clamp(18px, 4vw, 48px);
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-width 0.3s ease,
+    opacity 0.3s ease;
+}
+
+/* Nav list open */
+.nav-list.open {
+  max-width: 1000px;
+  opacity: 1;
+}
+
+/* Nav links */
+.nav-list a {
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  position: relative;
+  padding: 0 6px;
+  opacity: 0.9;
+  transition: opacity 160ms ease;
+  font-size: 0.7rem;
+}
+
+/* Remove old underline */
+.nav-list a::after {
+  content: none;
+}
+
+/* Brackets on hover */
+.nav-list a::before,
+.nav-list a::after {
+  opacity: 0;
+  transition: opacity 160ms ease;
+  font-weight: 400;
+}
+
+.nav-list a::before {
+  content: "[";
+  margin-right: 2px;
+}
+.nav-list a::after {
+  content: "]";
+  margin-left: 2px;
+}
+
+.nav-list a:hover::before,
+.nav-list a:hover::after,
+.nav-list a:focus::before,
+.nav-list a:focus::after,
+.nav-list a.active::before,
+.nav-list a.active::after {
+  opacity: 1;
+}
+
+.nav-list a:hover,
+.nav-list a:focus {
+  opacity: 1;
+}
+
+.nav-list a.active {
+  opacity: 1;
+}
+
+.page {
+  min-height: calc(100dvh - 100px);
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 8vh 4px; /* smaller horizontal padding */
+  display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+  .nav-list {
+    gap: 20px;
+  }
+}
+
+.site-footer {
+  height: auto; /* let height expand for two lines */
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 16px var(--pad);
+  display: flex;
+  flex-direction: column; /* stack content vertically */
+  align-items: center;
+  justify-content: center;
+  color: var(--fg);
+  font-size: 0.6rem;
+  background: var(--bg);
+  border-top: none;
+}
+
+.site-footer .footer-links {
+  color: var(--fg);
+  font-size: 0.6rem;
+  background: var(--bg);
+  margin-top: 6px; /* small gap below "ⓒ LSC FILMS 2025" */
+}
+
+.site-footer .footer-links a {
+  text-decoration: none;
+  color: var(--fg); /* same color as footer text */
+  font-weight: 500;
+}
+
+.site-footer .footer-links a:hover {
+  text-decoration: underline;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50vh;
+  height: 30vh;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gif-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+
+.gif-img {
+  width: 250px;
+  height: 250px;
+  object-fit: contain; /* keeps aspect ratio */
+}
+
+/* Tweet embed styles */
+
+.tweet-container {
+  text-align: left; /* centers the card horizontally */
+  margin: 20px 0; /* optional vertical spacing between cards */
+}
+
+.tweet-card {
+  max-width: 600px;
+  border: 1px solid #e1e8ed;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  position: relative;
+  font-family: inherit;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease; /* add transition here */
+}
+
+.tweet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.tweet-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.tweet-user strong {
+  display: block;
+  font-size: 14px;
+  color: #14171a;
+}
+
+.tweet-user span {
+  font-size: 13px;
+  color: #657786;
+}
+
+.tweet-text {
+  font-size: 15px;
+  color: #14171a;
+  margin: 8px 0 12px 0;
+  line-height: 1.4;
+}
+
+.tweet-footer {
+  font-size: 12px;
+  color: #657786;
+}
+
+.tweet-user {
+  flex-grow: 1;
+}
+
+.tweet-x-logo {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 20px;
+  height: 20px;
+}
+
+.tweet-x-logo svg {
+  width: 0%;
+  height: 0%;
+}
+
+.tweet-image {
+  width: 100%;
+  height: auto; /* keeps aspect ratio */
+  border-radius: 12px;
+  margin: 8px 0;
+  object-fit: cover;
+}
+
+/* Keep all your existing styles as-is ... */
+
+/* Add hover effect to tweet card link */
+.tweet-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.tweet-card:hover {
+  transform: scale(1.0025); /* slightly enlarge the card */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* stronger shadow on hover */
+}
+
+.tweet-caption {
+  margin: 8px 0;
+  font-size: 0.95rem;
+  color: #222;
+}
+
+.tweet-video video {
+  width: 100%;
+  border-radius: 12px;
+  margin: 8px 0;
+}
+
+      /* --- LOGIN STYLES --- */
+      .login-screen {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f5f5f5;
+        z-index: 9999;
+      }
+      .login-box {
+        background: white;
+        padding: 20px 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        width: 300px;
+      }
+      .login-box img {
+        width: 60px;
+        margin-bottom: 15px;
+      }
+      .login-box input {
+        padding: 10px;
+        font-size: 14px;
+        width: 100%;
+        margin: 12px 0;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      .login-box button {
+        padding: 10px 16px;
+        font-size: 14px;
+        cursor: pointer;
+        border: 0;
+        border-radius: 6px;
+        background: transparent;
+      }
+      .error {
+        color: red;
+        font-size: 12px;
+        margin-top: 15px;
+      }
+      body.locked {
+        overflow: hidden; /* prevent scrolling while login is up */
+      }

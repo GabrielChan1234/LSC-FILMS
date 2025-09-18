@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MEDIA - LSC FILMS</title>
+    <link rel="icon" href="images/lscfilmslogo.png" type="image/png" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* --- Filter Buttons --- */
+      .media-filters {
+        text-align: center;
+        margin: 20px 0 10px;
+      }
+
+      .filter-btn {
+        cursor: pointer;
+        color: var(--fg, #111);
+        display: inline-block;
+        font-size: 14px;
+        margin: 0 10px;
+        position: relative;
+        transition: color 0.2s ease;
+      }
+
+      .filter-btn::before,
+      .filter-btn::after {
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+      .filter-btn::before {
+        content: "[";
+        margin-right: 4px;
+      }
+      .filter-btn::after {
+        content: "]";
+        margin-left: 4px;
+      }
+
+      .filter-btn:hover::before,
+      .filter-btn:hover::after,
+      .filter-btn.active::before,
+      .filter-btn.active::after {
+        opacity: 1;
+      }
+
+      /* --- Sort Dropdown (FAQ-style) --- */
+      /* --- Sort Dropdown (FAQ-style) --- */
+      .media-sort {
+        text-align: center; /* ✅ center the sort */
+        margin: 10px auto 30px;
+      }
+
+      .sort-question {
+        cursor: pointer;
+        color: var(--fg, #111);
+        display: inline-block;
+        font-size: 14px;
+        position: relative;
+        transition: color 0.2s ease;
+      }
+
+      .sort-question::before,
+      .sort-question::after {
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+      .sort-question::before {
+        content: "[";
+        margin-right: 4px;
+      }
+      .sort-question::after {
+        content: "]";
+        margin-left: 4px;
+      }
+
+      .sort-question:hover::before,
+      .sort-question:hover::after {
+        opacity: 1;
+      }
+
+      .media-sort.open .sort-question::before,
+      .media-sort.open .sort-question::after {
+        opacity: 1;
+      }
+
+      .sort-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition:
+          max-height 0.3s ease,
+          margin-top 0.3s ease;
+        color: #666;
+        margin-top: 0;
+        font-size: 14px;
+      }
+
+      .media-sort.open .sort-answer {
+        max-height: 200px;
+        margin-top: 6px;
+      }
+
+      .sort-answer div {
+        padding: 6px 0;
+        cursor: pointer;
+        transition: color 0.15s ease;
+        color: #666;
+      }
+
+      .sort-answer div:hover {
+        color: #111;
+      }
+
+      /* --- Poster Grid --- */
+      .poster-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 16px;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+
+      .poster-link {
+        display: block;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #eee;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .poster-link:hover {
+        transform: scale(1.0025);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .poster {
+        width: 100%;
+        display: block;
+        aspect-ratio: 1688/2500;
+        object-fit: cover;
+        border-radius: 12px;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      /* Poster animation states */
+      .poster-link {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        transition: all 0.4s ease; /* smooth fade + movement */
+      }
+
+      .poster-link.hide {
+        opacity: 0;
+        transform: scale(0.8) translateY(30px); /* shrink + slide down */
+        pointer-events: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="site-header" role="banner">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand nav-toggle" href="#" aria-label="Toggle navigation">
+          <img src="images/lscfilmslogo.png" alt="Logo" class="brand-logo" />
+        </a>
+        <ul class="nav-list">
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="news.html">NEWS</a></li>
+          <li><a href="media.html" class="active">MEDIA</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="page" role="main" aria-live="polite">
+      <section class="content">
+        <!-- Filter Buttons -->
+        <div class="media-filters">
+          <span class="filter-btn active" data-filter="all">ALL</span>
+          <span class="filter-btn" data-filter="short">FILM</span>
+          <span class="filter-btn" data-filter="tv">TV</span>
+          <span class="filter-btn" data-filter="web">WEB</span>
+        </div>
+
+        <!-- Sort Dropdown -->
+        <div class="sort-container">
+          <div class="media-sort">
+            <div class="sort-question">SORTING BY</div>
+            <div class="sort-answer">
+              <div data-sort="az">A - Z</div>
+              <div data-sort="default">CATEGORY</div>
+              <div data-sort="newest">↑ NEWEST FIRST</div>
+              <div data-sort="oldest">↓ OLDEST FIRST</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Poster Grid -->
+        <div class="poster-grid" id="posterGrid">
+          <!-- Short Films -->
+          <a href="short34-01.html" class="poster-link" data-category="short" data-date="2025-09-24">
+            <img src="images/JR3_DRCTR_CUT_PSTR.png" alt="JOHN REEVES: CHAPTER 3-B" class="poster" />
+          </a>
+          <a href="short34.html" class="poster-link" data-category="short" data-date="2025-09-24">
+            <img src="images/JR3_Fight1Sht_v2.png" alt="JOHN REEVES: CHAPTER 3" class="poster" />
+          </a>
+          <a href="short33.html" class="poster-link" data-category="short" data-date="2022-08-07">
+            <img src="images/CODA_FinalPoster.png" alt="CODA" class="poster" />
+          </a>
+          <a href="short32.html" class="poster-link" data-category="short" data-date="2021-07-25">
+            <img src="images/Cosmos_Final_Poster.png" alt="COSMOS" class="poster" />
+          </a>
+          <a href="short31.html" class="poster-link" data-category="short" data-date="2021-05-30">
+            <img src="images/John_Reeves_Chapter_2_Final_Poster.png" alt="JOHN REEVES: CHAPTER 2" class="poster" />
+          </a>
+          <a href="short30.html" class="poster-link" data-category="short" data-date="2021-01-03">
+            <img src="images/genesis-official-final-poster.png" alt="GENESIS" class="poster" />
+          </a>
+          <a href="short29.html" class="poster-link" data-category="short" data-date="2020-12-20">
+            <img src="images/john-reeves-final-poster-v2.png" alt="JOHN REEVES" class="poster" />
+          </a>
+          <a href="short28.html" class="poster-link" data-category="short" data-date="2020-07-21">
+            <img src="images/agent-roger-rogers-final-poster.png" alt="AGENT ROGER ROGERS" class="poster" />
+          </a>
+          <a href="short27.html" class="poster-link" data-category="short" data-date="2020-06-26">
+            <img src="images/the-assassin-doomsday-final-poster.png" alt="ASSASSIN: DOOMSDAY" class="poster" />
+          </a>
+          <a href="short26.html" class="poster-link" data-category="short" data-date="2020-05-30">
+            <img src="images/the-assassin-war-final-poster.png" alt="ASSASSIN: WAR" class="poster" />
+          </a>
+          <a href="short25.html" class="poster-link" data-category="short" data-date="2020-05-11">
+            <img src="images/morse-final-poster.png" alt="MORSE" class="poster" />
+          </a>
+          <a href="short24.html" class="poster-link" data-category="short" data-date="2020-05-04">
+            <img src="images/the-assassin-rampage-final-poster.png" alt="ASSASSIN: RAMPAGE" class="poster" />
+          </a>
+          <a href="short23.html" class="poster-link" data-category="short" data-date="2020-04-17">
+            <img src="images/annihilation-final-poster.png" alt="ANNIHILATION" class="poster" />
+          </a>
+          <a href="short22.html" class="poster-link" data-category="short" data-date="2020-04-02">
+            <img src="images/total-invasion-final-poster.png" alt="TOTAL INVASION" class="poster" />
+          </a>
+          <a href="short21.html" class="poster-link" data-category="short" data-date="2019-12-31">
+            <img src="images/the-assassin-vengeance-final-poster.png" alt="ASSASSIN: VENGEANCE" class="poster" />
+          </a>
+          <a href="short20.html" class="poster-link" data-category="short" data-date="2019-12-06">
+            <img src="images/invader-final-poster.png" alt="INVADER" class="poster" />
+          </a>
+          <a href="short19.html" class="poster-link" data-category="short" data-date="2019-07-24">
+            <img src="images/the-assassin-captured-final-poster.png" alt="ASSASSIN: CAPTURED" class="poster" />
+          </a>
+          <a href="short18.html" class="poster-link" data-category="short" data-date="2019-07-21">
+            <img src="images/the-robbery-the-hunt-final-poster.png" alt="ROBBERY: THE HUNT" class="poster" />
+          </a>
+          <a href="short17.html" class="poster-link" data-category="short" data-date="2019-06-12">
+            <img src="images/falling-on-stuff-again-pi.png" alt="FALLING ON STUFF AGAIN" class="poster" />
+          </a>
+          <a href="short16.html" class="poster-link" data-category="short" data-date="2019-02-19">
+            <img src="images/mission-invasion-final-poster.png" alt="MISSION: INVASION" class="poster" />
+          </a>
+          <a href="short15.html" class="poster-link" data-category="short" data-date="2019-02-11">
+            <img src="images/dart-swamp-pi.png" alt="DART SWAMP" class="poster" />
+          </a>
+          <a href="short14.html" class="poster-link" data-category="short" data-date="2019-02-10">
+            <img src="images/tfsp-5-pi.png" alt="FAKE SHOPPING SPREE 5" class="poster" />
+          </a>
+          <a href="short13.html" class="poster-link" data-category="short" data-date="2019-01-21">
+            <img src="images/the-assassin-final-poster.png" alt="ASSASSIN" class="poster" />
+          </a>
+          <a href="short12.html" class="poster-link" data-category="short" data-date="2018-12-28">
+            <img src="images/the-robbery-3-final-poster.png" alt="ROBBERY: THE GREAT ESCAPE" class="poster" />
+          </a>
+          <a href="short11.html" class="poster-link" data-category="short" data-date="2018-10-23">
+            <img src="images/invasions-final-poster.png" alt="INVASIONS" class="poster" />
+          </a>
+          <a href="short10.html" class="poster-link" data-category="short" data-date="2018-09-09">
+            <img src="images/tfsp-4-pi.png" alt="FAKE SHOPPING SPREE 4" class="poster" />
+          </a>
+          <a href="short9.html" class="poster-link" data-category="short" data-date="2018-09-02">
+            <img src="images/tfsp-3-pi.png" alt="FAKE SHOPPING SPREE 3" class="poster" />
+          </a>
+          <a href="short8.html" class="poster-link" data-category="short" data-date="2018-08-26">
+            <img src="images/the-invasion-final-poster.png" alt="INVASION" class="poster" />
+          </a>
+          <a href="short7.html" class="poster-link" data-category="short" data-date="2018-08-12">
+            <img src="images/the-robbery-2-final-poster.png" alt="ROBBERY: TIME FOR REVENGE" class="poster" />
+          </a>
+          <a href="short6.html" class="poster-link" data-category="short" data-date="2018-08-08">
+            <img src="images/tfsp-2-pi.png" alt="FAKE SHOPPING SPREE 2" class="poster" />
+          </a>
+          <a href="short5.html" class="poster-link" data-category="short" data-date="2018-08-03">
+            <img src="images/tfsp-1-pi.png" alt="FAKE SHOPPING SPREE" class="poster" />
+          </a>
+          <a href="short4.html" class="poster-link" data-category="short" data-date="2018-08-02">
+            <img src="images/the-robbery-final-poster.png" alt="ROBBERY" class="poster" />
+          </a>
+          <a href="short3.html" class="poster-link" data-category="short" data-date="2018-07-16T03:00:00">
+            <img src="images/falling-on-stuff-pi.png" alt="FALLING ON STUFF" class="poster" />
+          </a>
+          <a href="short2.html" class="poster-link" data-category="short" data-date="2018-07-16T02:00:00">
+            <img src="images/falling-on-scooter-pi.png" alt="FALLING ON SCOOTER" class="poster" />
+          </a>
+          <a href="short1.html" class="poster-link" data-category="short" data-date="2018-07-16T01:00:00">
+            <img src="images/the-stupid-thief-pi.png" alt="STUPID THIEF" class="poster" />
+          </a>
+
+          <!-- TV Series -->
+          <a href="tv5.html" class="poster-link" data-category="tv" data-date="2022-02-20">
+            <img src="images/AgentThree_Season2_FinalPoster.png" alt="AGENT THREE S2" class="poster" />
+          </a>
+          <a href="tv4.html" class="poster-link" data-category="tv" data-date="2021-06-20">
+            <img src="images/ETV_Rambo_Final_Poster.png" alt="RAMBO" class="poster" />
+          </a>
+          <a href="tv3.html" class="poster-link" data-category="tv" data-date="2021-01-31">
+            <img src="images/agent-three-season-1-official-poster.png" alt="AGENT THREE S1" class="poster" />
+          </a>
+          <a href="tv2.html" class="poster-link" data-category="tv" data-date="2019-08-04">
+            <img src="images/SurvivalGame_Season2_FinalPoster.png" alt="SURVIVAL GAME S2" class="poster" />
+          </a>
+          <a href="tv1.html" class="poster-link" data-category="tv" data-date="2018-05-09">
+            <img src="images/SurvivalGame_Season1_FinalPoster.png" alt="SURVIVAL GAME S1" class="poster" />
+          </a>
+
+          <!-- Web Series -->
+          <a href="web-11.html" class="poster-link" data-category="web" data-date="2024-12-24">
+            <img src="images/web-the-vault.png" alt="VAULT" class="poster" />
+          </a>
+          <a href="web-10.html" class="poster-link" data-category="web" data-date="2021-02-15">
+            <img src="images/web-evering-documentary.png" alt="DOCUMENTARIES" class="poster" />
+          </a>
+          <a href="web-09.html" class="poster-link" data-category="web" data-date="2020-12-25">
+            <img src="images/web-vlogs.png" alt="VLOGS" class="poster" />
+          </a>
+          <a href="web-08.html" class="poster-link" data-category="web" data-date="2020-09-20">
+            <img src="images/web-everything-wrong.png" alt="EVERYTHING WRONG" class="poster" />
+          </a>
+
+          <a href="web-07.html" class="poster-link" data-category="web" data-date="2020-09-14">
+            <img src="images/web-hmpp.png" alt="HARD MODE PING PONG" class="poster" />
+          </a>
+          <a href="web-06.html" class="poster-link" data-category="web" data-date="2020-06-01">
+            <img src="images/web-the-burglary.png" alt="BURGLARY" class="poster" />
+          </a>
+          <a href="web-05.html" class="poster-link" data-category="web" data-date="2020-05-17">
+            <img src="images/web-weekly-cubing.png" alt="WEEKLY CUBING" class="poster" />
+          </a>
+          <a href="web-04.html" class="poster-link" data-category="web" data-date="2020-05-03">
+            <img src="images/web-lsc-events.png" alt="EVENTS" class="poster" />
+          </a>
+          <a href="web-03.html" class="poster-link" data-category="web" data-date="2020-02-29">
+            <img src="images/web-fps.png" alt="FPS" class="poster" />
+          </a>
+          <a href="web-02.html" class="poster-link" data-category="web" data-date="2020-01-11">
+            <img src="images/web-tbd.png" alt="BIRTHDAY SONG" class="poster" />
+          </a>
+          <a href="web-01.html" class="poster-link" data-category="web" data-date="2019-08-07">
+            <img src="images/web-overview.png" alt="OVERVIEW" class="poster" />
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      ⓒ LSC FILMS 2025
+      <div class="footer-links">
+        <a href="faq.html">FAQ</a>
+      </div>
+    </footer>
+
+    <!-- Load login overlay + logic globally -->
+    <script src="login.js"></script>
+
+    <script>
+      // Mobile nav toggle
+      const logoToggle = document.querySelector(".nav-toggle");
+      const navList = document.querySelector(".nav-list");
+      logoToggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        navList.classList.toggle("open");
+      });
+
+      // Filtering posters
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      const posterGrid = document.getElementById("posterGrid");
+      let posterLinks = Array.from(document.querySelectorAll(".poster-link"));
+
+      filterButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          // Update active button
+          filterButtons.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+
+          const filter = btn.dataset.filter;
+          posterLinks.forEach((link) => {
+            if (filter === "all" || link.dataset.category === filter) {
+              link.classList.remove("hidden");
+            } else {
+              link.classList.add("hidden");
+            }
+          });
+        });
+      });
+
+      // Sorting posters (FAQ-style dropdown)
+      const mediaSort = document.querySelector(".media-sort");
+      const sortQuestion = mediaSort.querySelector(".sort-question");
+      const sortOptions = mediaSort.querySelectorAll(".sort-answer div");
+
+      sortQuestion.addEventListener("click", () => {
+        mediaSort.classList.toggle("open");
+      });
+
+      sortOptions.forEach((option) => {
+        option.addEventListener("click", () => {
+          const order = option.dataset.sort;
+          let sorted;
+
+          if (order === "default") {
+            const categoryOrder = { short: 1, tv: 2, web: 3 };
+            sorted = [...posterLinks].sort((a, b) => {
+              return categoryOrder[a.dataset.category] - categoryOrder[b.dataset.category];
+            });
+          } else if (order === "az") {
+            // ✅ Sort alphabetically by poster alt text
+            sorted = [...posterLinks].sort((a, b) => {
+              const nameA = a.querySelector("img").alt.toLowerCase();
+              const nameB = b.querySelector("img").alt.toLowerCase();
+              return nameA.localeCompare(nameB);
+            });
+          } else {
+            sorted = [...posterLinks].sort((a, b) => {
+              const dateA = new Date(a.dataset.date);
+              const dateB = new Date(b.dataset.date);
+              return order === "newest" ? dateB - dateA : dateA - dateB;
+            });
+          }
+
+          sorted.forEach((poster) => posterGrid.appendChild(poster));
+
+          // ✅ Update button text to show selected sort option
+          sortQuestion.textContent = "SORTING BY " + option.textContent;
+
+          // Close dropdown after selection
+          mediaSort.classList.remove("open");
+        });
+      });
+    </script>
+  </body>
+</html>

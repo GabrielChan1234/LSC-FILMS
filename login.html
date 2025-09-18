@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Login</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f5f5f5;
+      margin: 0;
+    }
+    .login-box {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      text-align: center;
+      width: 300px;
+    }
+
+    /* logo inside login box */
+    .login-logo {
+      width: 40px;
+      height: auto;
+      display: block;
+      margin: 0 auto 1px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 14px;
+      width: 100%;
+      margin: 12px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      text-align: center;
+      /* visually show uppercase */
+      text-transform: uppercase;
+    }
+    button {
+      padding: 10px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      border: 0px solid #333;
+      border-radius: 6px;
+      background: transparent;
+    }
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <!-- logo: change src if your logo path differs -->
+    <img src="images/lscfilmslogo.png" alt="LSC FILMS" class="login-logo" />
+
+    <input type="text" id="username" placeholder="USER ID" autocapitalize="characters" />
+    <button id="loginBtn">+</button>
+    <div class="error" id="errorMsg"></div>
+  </div>
+
+  <script>
+    // Encoded list of allowed names (base64). These decode to the allowed names,
+    // then we normalize to UPPERCASE for matching.
+    const encodedNames = [
+      "R2FicmllbCBDaGFu",  // Gabriel Chan
+      "UmFmYWVsIENoYW4=", // Rafael Chan
+      "TGluZGEgU3Vt",     // Linda Sum
+      "VmluY2VudCBDaGFu"  // Vincent Chan
+    ];
+
+    // Decode and normalize to UPPERCASE at runtime
+    const allowedNames = encodedNames.map(n => atob(n).toUpperCase());
+
+    const input = document.getElementById("username");
+    const btn = document.getElementById("loginBtn");
+    const errorMsg = document.getElementById("errorMsg");
+
+    // Force displayed characters to uppercase as the user types.
+    input.addEventListener("input", (e) => {
+      // preserve caret position
+      const pos = input.selectionStart;
+      input.value = input.value.toUpperCase();
+      // restore caret
+      input.setSelectionRange(pos, pos);
+      errorMsg.textContent = "";
+    });
+
+    // Allow Enter to submit
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        btn.click();
+      }
+    });
+
+    btn.addEventListener("click", () => {
+      const name = input.value.trim().toUpperCase();
+      if (allowedNames.includes(name)) {
+        // use replace so back button can't return to login
+        window.location.replace("index.html");
+      } else {
+        errorMsg.textContent = "INCORRECT USER ID";
+      }
+    });
+  </script>
+</body>
+</html>

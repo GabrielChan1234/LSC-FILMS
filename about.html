@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>ABOUT – LSC FILMS</title>
+        <link rel="icon" href="images/lscfilmslogo.png" type="image/png" />
+        <link rel="stylesheet" href="styles.css" />
+        <style>
+            .about-container {
+                max-width: 800px;
+                margin: 40px auto;
+                padding: 0 var(--pad, 16px);
+            }
+
+            .about-item {
+                padding: 12px 0;
+            }
+
+            /* Style like FAQ but static */
+            .about-question {
+                color: var(--fg, #111);
+                font-size: 14px;
+                font-weight: bold;
+                margin-bottom: 6px;
+            }
+
+            .about-answer {
+                font-size: 14px;
+                line-height: 1.4;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header class="site-header" role="banner">
+            <nav class="nav" aria-label="Primary">
+                <a class="brand nav-toggle" href="#" aria-label="Toggle navigation">
+                    <img src="images/lscfilmslogo.png" alt="Logo" class="brand-logo" />
+                </a>
+                <ul class="nav-list">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="news.html">NEWS</a></li>
+                    <li><a href="media.html">MEDIA</a></li>
+                    <li><a href="about.html" class="active">ABOUT</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="page" role="main" aria-live="polite">
+            <div class="about-container">
+                <div class="about-item">
+                    <div class="about-question">FOUNDATION</div>
+                    <div class="about-answer">
+                        LSC FILMS IS A YOUTUBE PRODUCTION BUSINESS THAT PRODUCES MEDIA INCLUDING SHORT FILMS, TV SERIES,
+                        AND WEB SERIES, OCCASIONALLY COLLABORATING WITH EVERING STUDIOS
+                    </div>
+                </div>
+                <div class="about-item">
+                    <div class="about-question">OWNERSHIP</div>
+                    <div class="about-answer">
+                        LSC FILMS HAS BEEN OWNED SOLEY BY GABRIEL CHAN SINCE THE INCEPTION OF THE PRODUCTION BUSINESS IN
+                        2018
+                    </div>
+                </div>
+                <div class="about-item">
+                    <div class="about-question">SHORT FILMS</div>
+                    <div class="about-answer">
+                        LSC FILMS IS KNOWN FOR SHORT FILMS INCLUDING <i>JOHN REEVES</i> AND <i>CODA</i>
+                    </div>
+                </div>
+                <div class="about-item">
+                    <div class="about-question">TV SERIES</div>
+                    <div class="about-answer">
+                        LSC FILMS IS KNOWN FOR TV SERIES INCLUDING <i>AGENT THREE</i> AND <i>RAMBO</i>
+                    </div>
+                </div>
+                <div class="about-item">
+                    <div class="about-question">WEB SERIES</div>
+                    <div class="about-answer">
+                        LSC FILMS IS KNOWN FOR WEB SERIES INCLUDING <i>OVERVIEW</i> AND <i>EVERYTHING WRONG</i>
+                    </div>
+                </div>
+
+                <div class="about-item">
+                    <div class="about-question">SEPARATION</div>
+                    <div class="about-answer">
+                        LSC FILMS IS NOT OPERATING UNDER OR AFFILIATED WITH THE FICTIONAL CORPORATE ENTITY, LAVA STORE
+                        COMPANY, AS A DISSOCIATION BETWEEN THE FICTIONAL WORLD AND REALITY WAS RECENTLY ESTABLISHED BY
+                        THE OWNER OF LSC FILMS
+                    </div>
+                    <div class="about-answer">&ensp;</div>
+                    <div class="about-answer">
+                        THIS SITE WILL STILL FEATURE MEDIA PRIOR TO THE DISSOCIATION FOR DOCUMENTATION PURPOSES
+                    </div>
+                </div>
+                <div class="about-item">
+                    <div class="about-question">LAVA STORE COMPANY</div>
+                    <div class="about-answer">
+                        PLEASE VISIT <i>LAVAPEDIA</i> TO LEARN MORE ABOUT THE FICTIONAL CORPORATE ENTITY
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="site-footer" role="contentinfo">
+            ⓒ LSC FILMS 2025
+            <div class="footer-links">
+                <a href="faq.html">FAQ</a>
+            </div>
+        </footer>
+
+        <!-- Load login overlay + logic globally -->
+        <script src="login.js"></script>
+
+        <script>
+            const logoToggle = document.querySelector(".nav-toggle");
+            const navList = document.querySelector(".nav-list");
+            logoToggle.addEventListener("click", (e) => {
+                e.preventDefault();
+                navList.classList.toggle("open");
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>FAQ - LSC FILMS</title>
+        <link rel="icon" href="images/lscfilmslogo.png" type="image/png" />
+        <link rel="stylesheet" href="styles.css" />
+        <style>
+            a {
+                text-decoration: none; /* removes underline */
+                color: inherit; /* makes links follow normal text color */
+            }
+
+            .faq-container {
+                max-width: 800px;
+                margin: 40px auto;
+                padding: 0 var(--pad, 16px);
+            }
+
+            .faq-item {
+                padding: 12px 0;
+            }
+
+            .faq-question {
+                cursor: pointer;
+                color: var(--fg, #111);
+                display: inline-block; /* so brackets wrap tightly */
+                font-size: 14px;
+                position: relative;
+                transition: color 0.2s ease;
+            }
+
+            /* Brackets (hidden by default) */
+            .faq-question::before,
+            .faq-question::after {
+                opacity: 0;
+                transition: opacity 0.2s ease;
+            }
+            .faq-question::before {
+                content: "[";
+                margin-right: 4px;
+            }
+            .faq-question::after {
+                content: "]";
+                margin-left: 4px;
+            }
+
+            /* Show brackets on hover */
+            .faq-question:hover::before,
+            .faq-question:hover::after {
+                opacity: 1;
+            }
+
+            /* Keep brackets when item is open */
+            .faq-item.open .faq-question::before,
+            .faq-item.open .faq-question::after {
+                opacity: 1;
+            }
+
+            .faq-answer {
+                max-height: 0;
+                overflow: hidden;
+                transition:
+                    max-height 0.3s ease,
+                    margin-top 0.3s ease;
+                color: #666; /* lighter than question */
+                margin-top: 0;
+                font-size: 14px;
+            }
+
+            .faq-item.open .faq-answer {
+                max-height: 200px; /* enough space for text */
+                margin-top: 8px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header class="site-header" role="banner">
+            <nav class="nav" aria-label="Primary">
+                <a class="brand nav-toggle" href="#" aria-label="Toggle navigation">
+                    <img src="images/lscfilmslogo.png" alt="Logo" class="brand-logo" />
+                </a>
+                <ul class="nav-list">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="news.html">NEWS</a></li>
+                    <li><a href="media.html">MEDIA</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="page" role="main" aria-live="polite">
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">HOW TO CONTACT LSC FILMS</div>
+                    <div class="faq-answer">LSC FILMS IS NOT ACCEPTING BUSINESS INQUIRES AT THIS TIME</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">WHEN WILL THE NEXT LSC FILMS SHORT FILM RELEASE</div>
+                    <div class="faq-answer">
+                        <i>JOHN REEVES: CHAPTER 3</i> IS THE NEXT LSC FILMS PRODUCTION AND UPDATES REGARDING RELEASE CAN
+                        BE FOUND IN NEWSFEED
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">WHY DOES NEWSFEED ONLY DATE BACK TO 03 09 23</div>
+                    <div class="faq-answer">FEED ONLY COVERS MEDIA POSTS FROM POST-CODA ERA</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">WHAT IS THE PURPOSE OF THIS SITE</div>
+                    <div class="faq-answer">THIS SITE IS THE CENTRALIZED HUB FOR ALL LSC FILMS MEDIA</div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="site-footer" role="contentinfo">
+            ⓒ LSC FILMS 2025
+            <div class="footer-links">
+                <a href="faq.html">FAQ</a>
+            </div>
+        </footer>
+
+        <!-- Load login overlay + logic globally -->
+        <script src="login.js"></script>
+
+        <script>
+            const faqItems = document.querySelectorAll(".faq-item");
+
+            faqItems.forEach((item) => {
+                const question = item.querySelector(".faq-question");
+                question.addEventListener("click", () => {
+                    item.classList.toggle("open");
+                });
+            });
+
+            const logoToggle = document.querySelector(".nav-toggle");
+            const navList = document.querySelector(".nav-list");
+            logoToggle.addEventListener("click", (e) => {
+                e.preventDefault();
+                navList.classList.toggle("open");
+            });
+        </script>
+    </body>
+</html>

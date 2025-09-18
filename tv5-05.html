@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>MEDIA - LSC FILMS</title>
+        <link rel="icon" href="images/lscfilmslogo.png" type="image/png" />
+        <link rel="stylesheet" href="styles.css" />
+        <style>
+            .poster-single {
+                display: block;
+                max-width: 100%;
+                width: 100%;
+                height: auto;
+                border-radius: 12px;
+                margin: 20px auto;
+                object-fit: cover;
+            }
+
+            .details {
+                max-width: 600px;
+                margin: 20px auto;
+                padding: 0 16px;
+                font-size: 14px;
+            }
+
+            .detail-question {
+                cursor: pointer;
+                color: var(--fg, #111);
+                display: inline-block;
+                position: relative;
+                transition: color 0.2s ease;
+                margin: 10px 0;
+            }
+
+            .detail-question::before,
+            .detail-question::after {
+                opacity: 0;
+                transition: opacity 0.2s ease;
+            }
+            .detail-question::before {
+                content: "[";
+                margin-right: 4px;
+            }
+            .detail-question::after {
+                content: "]";
+                margin-left: 4px;
+            }
+
+            .detail-question:hover::before,
+            .detail-question:hover::after {
+                opacity: 1;
+            }
+
+            .detail.open .detail-question::before,
+            .detail.open .detail-question::after {
+                opacity: 1;
+            }
+
+            .detail-answer {
+                max-height: 0;
+                overflow: hidden;
+                transition:
+                    max-height 0.3s ease,
+                    margin-top 0.3s ease;
+                color: #666;
+                margin-top: 0;
+            }
+
+            .detail.open .detail-answer {
+                max-height: 500px;
+                margin-top: 6px;
+            }
+
+            .detail-answer div {
+                padding: 6px 0;
+            }
+
+            .watch-link {
+                display: inline-block;
+                margin: 12px 0;
+                font-size: 14px;
+                color: var(--fg, #111);
+                transition: color 0.2s ease;
+                text-decoration: none;
+            }
+
+            .watch-link:hover {
+                text-decoration: none;
+            }
+
+            /* Make PREVIEW links look like CREDITS but in one row */
+            .detail.preview .detail-answer {
+                display: flex; /* put links in a row */
+                gap: 24px; /* spacing between links (like credit line breaks) */
+                color: #666; /* match detail answer text color */
+                flex-wrap: wrap; /* wrap to next line if too long */
+            }
+
+            .detail.preview .detail-answer a {
+                font-size: 14px;
+                color: #666; /* same color as credits */
+                text-decoration: none; /* no underline */
+                transition: color 0.2s ease;
+                padding: 6px 0; /* same vertical spacing feel as credits */
+            }
+
+            .detail.preview .detail-answer a:hover {
+                color: #111;
+            }
+        </style>
+    </head>
+    <body>
+        <header class="site-header" role="banner">
+            <nav class="nav" aria-label="Primary">
+                <a class="brand nav-toggle" href="#" aria-label="Toggle navigation">
+                    <img src="images/lscfilmslogo.png" alt="Logo" class="brand-logo" />
+                </a>
+                <ul class="nav-list">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="news.html">NEWS</a></li>
+                    <li><a href="media.html" class="active">MEDIA</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="page" role="main">
+            <!-- Single Poster -->
+            <img src="images/ATS2E5.JPG" alt="AGENT THREE S2" class="poster-single" />
+
+            <section class="details">
+                <!-- Watch Link -->
+                <div>
+                    <a href="https://youtu.be/ensShQUc0Cc" target="_blank" class="watch-link">&nbsp;&nbsp;WATCH EP 5</a>
+                </div>
+
+                <div class="detail preview">
+                    <div class="detail-question">S2</div>
+                    <div class="detail-answer">
+                        <a href="tv5-01.html">EP 1</a>
+                        <a href="tv5-02.html">EP 2</a>
+                        <a href="tv5-03.html">EP 3</a>
+                        <a href="tv5-04.html">EP 4</a>
+                        <a href="tv5-05.html">EP 5</a>
+                        <a href="tv5-06.html">EP 6</a>
+                    </div>
+                </div>
+
+                <!-- Credits -->
+                <div class="detail">
+                    <div class="detail-question">CREDITS</div>
+                    <div class="detail-answer">
+                        <div>DIRECTED BY RAFAEL CHAN</div>
+                        <div>STARRING RAFAEL CHAN</div>
+                        <div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GABRIEL
+                            CHAN
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info -->
+                <div class="detail">
+                    <div class="detail-question">INFO</div>
+                    <div class="detail-answer">
+                        <div>"SHIELD OF PAIN"</div>
+                        <div>ACTION / THRILLER</div>
+                        <div>AIRED 03 20 22</div>
+                        <div>05 MINUTES 50 SECONDS</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer" role="contentinfo">
+            ⓒ LSC FILMS 2025
+            <div class="footer-links">
+                <a href="faq.html">FAQ</a>
+            </div>
+        </footer>
+
+        <!-- Load login overlay + logic globally -->
+        <script src="login.js"></script>
+        
+        <script>
+            // nav toggle
+            const logoToggle = document.querySelector(".nav-toggle");
+            const navList = document.querySelector(".nav-list");
+            logoToggle.addEventListener("click", (e) => {
+                e.preventDefault();
+                navList.classList.toggle("open");
+            });
+
+            // details dropdown
+            const detailSections = document.querySelectorAll(".detail");
+            detailSections.forEach((section) => {
+                const question = section.querySelector(".detail-question");
+                question.addEventListener("click", () => {
+                    section.classList.toggle("open");
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LSC FILMS SITE</title>
+    <link rel="icon" href="images/lscfilmslogo.png" type="image/png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <!-- SITE CONTENT -->
+    <header class="site-header" role="banner">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand nav-toggle" href="#" aria-label="Toggle navigation">
+          <img src="images/lscfilmslogo.png" alt="Logo" class="brand-logo" />
+        </a>
+        <ul class="nav-list">
+          <li><a href="index.html" class="active">HOME</a></li>
+          <li><a href="news.html">NEWS</a></li>
+          <li><a href="media.html">MEDIA</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="page" role="main" aria-live="polite">
+      <section class="gif-section">
+        <a href="short34.html">
+          <img src="images/JR3-PSTR-ANIM.gif" alt="Animated Logo" class="gif-img" />
+        </a>
+      </section>
+      <section class="hero">
+        <img src="images/jr3-msg-2.jpg" alt="Hero Image" class="hero-img" />
+      </section>
+      <section class="content"></section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      ⓒ LSC FILMS 2025
+      <div class="footer-links">
+        <a href="faq.html">FAQ</a>
+      </div>
+    </footer>
+
+    <!-- Load login overlay + logic globally -->
+    <script src="login.js"></script>
+
+    <!-- Other page-specific scripts -->
+    <script>
+      // NAV TOGGLE EXAMPLE
+      const logoToggle = document.querySelector(".nav-toggle");
+      const navList = document.querySelector(".nav-list");
+      logoToggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        navList.classList.toggle("open");
+      });
+    </script>
+  </body>
+</html>

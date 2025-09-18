@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>MEDIA - LSC FILMS</title>
+        <link rel="icon" href="images/lscfilmslogo.png" type="image/png" />
+        <link rel="stylesheet" href="styles.css" />
+        <style>
+            .carousel-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 20px; /* spacing between arrow and poster */
+                max-width: 700px;
+                margin: 20px auto;
+            }
+
+            .poster-carousel {
+                flex: 1;
+                max-width: 600px;
+                overflow: hidden;
+                border-radius: 12px;
+            }
+
+            .poster-track {
+                display: flex;
+                transition: transform 0.6s ease;
+            }
+
+            .poster-track img {
+                min-width: 100%;
+                max-width: 100%;
+                border-radius: 12px;
+                display: block;
+            }
+
+            .carousel-arrow {
+                font-size: 36px;
+                font-weight: bold;
+                color: #111;
+                background: none;
+                border: none;
+                cursor: pointer;
+                user-select: none;
+            }
+
+            .carousel-arrow.hidden {
+                visibility: hidden; /* keep spacing consistent */
+            }
+
+            .details {
+                max-width: 600px;
+                margin: 20px auto;
+                padding: 0 16px;
+                font-size: 14px;
+            }
+
+            .detail-question {
+                cursor: pointer;
+                color: var(--fg, #111);
+                display: inline-block;
+                position: relative;
+                transition: color 0.2s ease;
+                margin: 10px 0;
+            }
+
+            .detail-question::before,
+            .detail-question::after {
+                opacity: 0;
+                transition: opacity 0.2s ease;
+            }
+            .detail-question::before {
+                content: "[";
+                margin-right: 4px;
+            }
+            .detail-question::after {
+                content: "]";
+                margin-left: 4px;
+            }
+
+            .detail-question:hover::before,
+            .detail-question:hover::after {
+                opacity: 1;
+            }
+
+            .detail.open .detail-question::before,
+            .detail.open .detail-question::after {
+                opacity: 1;
+            }
+
+            .detail-answer {
+                max-height: 0;
+                overflow: hidden;
+                transition:
+                    max-height 0.3s ease,
+                    margin-top 0.3s ease;
+                color: #666;
+                margin-top: 0;
+            }
+
+            .detail.open .detail-answer {
+                max-height: 500px;
+                margin-top: 6px;
+            }
+
+            .detail-answer div {
+                padding: 6px 0;
+            }
+
+            .watch-link {
+                display: inline-block;
+                margin: 12px 0;
+                font-size: 14px;
+                color: var(--fg, #111);
+                transition: color 0.2s ease;
+                text-decoration: none; /* 🔑 removes underline */
+            }
+
+            .watch-link:hover {
+                text-decoration: none; /* keep it clean on hover */
+            }
+
+            /* Make PREVIEW links look like CREDITS but in one row */
+            .detail.preview .detail-answer {
+                display: flex; /* put links in a row */
+                gap: 24px; /* spacing between links (like credit line breaks) */
+                color: #666; /* match detail answer text color */
+                flex-wrap: wrap; /* wrap to next line if too long */
+            }
+
+            .detail.preview .detail-answer a {
+                font-size: 14px;
+                color: #666; /* same color as credits */
+                text-decoration: none; /* no underline */
+                transition: color 0.2s ease;
+                padding: 6px 0; /* same vertical spacing feel as credits */
+            }
+
+            .detail.preview .detail-answer a:hover {
+                color: #111;
+            }
+        </style>
+    </head>
+    <body>
+        <header class="site-header" role="banner">
+            <nav class="nav" aria-label="Primary">
+                <a class="brand nav-toggle" href="#" aria-label="Toggle navigation">
+                    <img src="images/lscfilmslogo.png" alt="Logo" class="brand-logo" />
+                </a>
+                <ul class="nav-list">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="news.html">NEWS</a></li>
+                    <li><a href="media.html" class="active">MEDIA</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="page" role="main">
+            <!-- Poster Carousel with external controls -->
+            <div class="carousel-container">
+                <button class="carousel-arrow left hidden">–⁠</button>
+
+                <div class="poster-carousel">
+                    <div class="poster-track">
+                        <img src="images/JR3_DRCTR_CUT_PSTR.png" alt="JOHN REEVES: CHAPTER 3" />
+                        <img src="images/jr3-poster.jpg" alt="JOHN REEVES: CHAPTER 3" />
+                        <img src="images/JR3_Tsr1Sht.jpg" alt="JOHN REEVES: CHAPTER 3" />
+                    </div>
+                </div>
+
+                <button class="carousel-arrow right">+</button>
+            </div>
+
+            <section class="details">
+
+                <div class="detail preview">
+                    <div class="detail-question">PREVIEW</div>
+                    <div class="detail-answer">
+                        <a href="https://youtu.be/KIfzCYyeoA8" target="_blank">MAIN</a>
+                        <a href="https://youtu.be/qvZK5zGAHK4" target="_blank">TEASER</a>
+                    </div>
+                </div>
+
+                <!-- Plot -->
+                <div class="detail">
+                    <div class="detail-question">PLOT</div>
+                    <div class="detail-answer">
+                        <div>IN THE ALTERNATE VISION FROM DIRECTOR GABRIEL CHAN — TWO YEARS AFTER THE EVENTS OF JOHN REEVES: CHAPTER 2, JOHN REEVES CONTINUES TO BE ON THE RUN FROM THE ROYAL TABLE OF ASSASSINS — UNTIL TIME AND LUCK RUN OUT.</div>
+                    </div>
+                </div>
+                
+                <!-- Credits -->
+                <div class="detail">
+                    <div class="detail-question">CREDITS</div>
+                    <div class="detail-answer">
+                        <div>DIRECTED BY GABRIEL CHAN</div>
+                        <div>STARRING GABRIEL CHAN</div>
+                        <div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAFAEL
+                            CHAN
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info -->
+                <div class="detail">
+                    <div class="detail-question">INFO</div>
+                    <div class="detail-answer">
+                        <div>ACTION / THRILLER</div>
+                        <div>LEVEL 5</div>
+                        <div>TO BE RELEASED</div>
+                        <div>0 MINUTES 0 SECONDS</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer" role="contentinfo">
+            ⓒ LSC FILMS 2025
+            <div class="footer-links">
+                <a href="faq.html">FAQ</a>
+            </div>
+        </footer>
+
+        <!-- Load login overlay + logic globally -->
+        <script src="login.js"></script>
+        
+        <script>
+            // nav toggle
+            const logoToggle = document.querySelector(".nav-toggle");
+            const navList = document.querySelector(".nav-list");
+            logoToggle.addEventListener("click", (e) => {
+                e.preventDefault();
+                navList.classList.toggle("open");
+            });
+
+            // details dropdown
+            const detailSections = document.querySelectorAll(".detail");
+            detailSections.forEach((section) => {
+                const question = section.querySelector(".detail-question");
+                question.addEventListener("click", () => {
+                    section.classList.toggle("open");
+                });
+            });
+
+            // Carousel logic
+            const track = document.querySelector(".poster-track");
+            const posters = document.querySelectorAll(".poster-track img");
+            const prevBtn = document.querySelector(".carousel-arrow.left");
+            const nextBtn = document.querySelector(".carousel-arrow.right");
+
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                prevBtn.classList.toggle("hidden", currentIndex === 0);
+                nextBtn.classList.toggle("hidden", currentIndex === posters.length - 1);
+            }
+
+            prevBtn.addEventListener("click", () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCarousel();
+                }
+            });
+
+            nextBtn.addEventListener("click", () => {
+                if (currentIndex < posters.length - 1) {
+                    currentIndex++;
+                    updateCarousel();
+                }
+            });
+
+            updateCarousel();
+        </script>
+    </body>
+</html>

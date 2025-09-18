@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>NEWS - LSC FILMS</title>
+        <link rel="icon" href="images/lscfilmslogo.png" type="image/png" />
+        <link rel="stylesheet" href="styles.css" />
+
+        <style>
+            .sort-container {
+                max-width: 600px;
+                margin: 20px auto;
+                padding: 0 16px;
+                text-align: rig; /* ✅ left-align the sort menu */
+            }
+
+            .sort {
+                display: inline-block;
+                text-align: left;
+                width: 100%;
+                max-width: 420px;
+                margin: 0 auto;
+                padding: 12px 0; /* same as faq-item spacing */
+            }
+
+            .sort-question {
+                cursor: pointer;
+                color: var(--fg, #111);
+                display: inline-block; /* brackets hug text */
+                font-size: 14px;
+                position: relative;
+                transition: color 0.2s ease;
+            }
+
+            /* Brackets hidden by default */
+            .sort-question::before,
+            .sort-question::after {
+                opacity: 0;
+                transition: opacity 0.2s ease;
+            }
+            .sort-question::before {
+                content: "[";
+                margin-right: 4px; /* match FAQ */
+            }
+            .sort-question::after {
+                content: "]";
+                margin-left: 4px; /* match FAQ */
+            }
+
+            /* Show brackets on hover */
+            .sort-question:hover::before,
+            .sort-question:hover::after {
+                opacity: 1;
+            }
+
+            /* Keep brackets when open */
+            .sort.open .sort-question::before,
+            .sort.open .sort-question::after {
+                opacity: 1;
+            }
+
+            .sort-answer {
+                max-height: 0;
+                overflow: hidden;
+                transition:
+                    max-height 0.3s ease,
+                    margin-top 0.3s ease;
+                color: #666; /* lighter than question */
+                margin-top: 0;
+                font-size: 14px;
+            }
+
+            .sort-answer div:hover {
+                color: #111;
+            }
+
+            /* Open state */
+            .sort.open .sort-answer {
+                max-height: 200px; /* enough space */
+                margin-top: 6px;
+            }
+
+            .sort-answer div {
+                padding: 6px 0; /* slimmer like FAQ */
+                cursor: pointer;
+                transition: color 0.15s ease;
+                color: #666; /* lighter than question */
+            }
+
+            /* Ensure dropdown doesn’t overlap tweets */
+            .sort-container {
+                margin-bottom: 18px;
+            }
+
+            /* Basic tweets wrapper */
+            .tweets {
+                max-width: 720px;
+                margin: 0 auto;
+                padding: 0 16px;
+            }
+
+            /* Keep original tweet styles minimally */
+            .tweet-container {
+                margin: 18px 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Header -->
+        <header class="site-header" role="banner">
+            <nav class="nav" aria-label="Primary">
+                <a class="brand nav-toggle" href="#" aria-label="Toggle navigation">
+                    <img src="images/lscfilmslogo.png" alt="Logo" class="brand-logo" />
+                </a>
+                <ul class="nav-list">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="news.html" class="active">NEWS</a></li>
+                    <li><a href="media.html">MEDIA</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="page" role="main" aria-live="polite">
+            <section class="content">
+                <!-- Sort like FAQ -->
+                <div class="sort-container">
+                    <div class="sort" id="sortBox">
+                        <div class="sort-question">
+                            SORTING FEED BY&nbsp;<span id="sortLabel"><i>SELECT</i></span>
+                        </div>
+                        <div class="sort-answer">
+                            <div data-sort="newest">↑ NEWEST FIRST</div>
+                            <div data-sort="oldest">↓ OLDEST FIRST</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tweets wrapper (required for sorting) -->
+                <div class="tweets">
+                    <!-- TWT #15 -->
+                    <div class="tweet-container">
+                        <div class="tweet-card" data-date="2025-08-24T08:00:00">
+                            <a
+                                href="https://x.com/Real_LSC/status/1959636857165381707"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tweet-link">
+                                <!-- Tweet content -->
+                                <div class="tweet-header">
+                                    <img src="images/lscfilmslogo.png" alt="LSC Films Logo" class="tweet-avatar" />
+                                    <div class="tweet-user"><strong>Gabriel Chan</strong> <span>@Real_LSC</span></div>
+
+                                    <!-- X logo -->
+                                    <div class="tweet-x-logo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="black">
+                                            <path
+                                                d="M714.163 519.284L1160.89 0H1058.04L667.137 450.887L356.216 0H0L468.102 681.821L0 1226.37H102.846L515.561 748.68L843.784 1226.37H1200L714.137 519.284H714.163ZM567.594 687.828L521.378 621.505L140.973 79.6941H306.707L604.455 506.505L650.671 572.828L1058.07 1151.35H892.339L567.594 687.853V687.828Z"
+                                                fill="black"
+                                                stroke="black"
+                                                stroke-width="40" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Tweet image -->
+                                <img src="images/jr3_msg.jpg" alt="Tweet Image" class="tweet-image" />
+
+                                <div class="tweet-footer">
+                                    <span>08 AM&nbsp;&nbsp;08 24 25</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- TWT #14 -->
+
+                    <div class="tweet-container">
+                        <div class="tweet-card" data-date="2025-08-15T10:00:00">
+                            <!-- Link wraps ONLY header, captions, and footer -->
+                            <a
+                                href="https://x.com/Real_LSC/status/1956402552678834505"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tweet-link">
+                                <!-- Tweet header -->
+                                <div class="tweet-header">
+                                    <img src="images/lscfilmslogo.png" alt="LSC Films Logo" class="tweet-avatar" />
+                                    <div class="tweet-user"><strong>Gabriel Chan</strong> <span>@Real_LSC</span></div>
+
+                                    <!-- X logo -->
+                                    <div class="tweet-x-logo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="black">
+                                            <path
+                                                d="M714.163 519.284L1160.89 0H1058.04L667.137 450.887L356.216 0H0L468.102 681.821L0 1226.37H102.846L515.561 748.68L843.784 1226.37H1200L714.137 519.284H714.163ZM567.594 687.828L521.378 621.505L140.973 79.6941H306.707L604.455 506.505L650.671 572.828L1058.07 1151.35H892.339L567.594 687.853V687.828Z"
+                                                fill="black"
+                                                stroke="black"
+                                                stroke-width="40" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Tweet caption (above video) -->
+                                <p class="tweet-caption">FIRST HOTEL IN FLORIDA</p>
+                                <p>&ensp;</p>
+                                <p class="tweet-caption">PRESENTED BY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LSC FILMS</p>
+                                <p>&ensp;</p>
+                                <p class="tweet-caption">
+                                    STARRING&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAFAEL
+                                    CHAN
+                                </p>
+                                <p class="tweet-caption">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LINDA
+                                    SUM
+                                </p>
+                                <p class="tweet-caption">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VINCENT
+                                    CHAN
+                                </p>
+                            </a>
+
+                            <!-- Tweet image -->
+                            <img src="images/media.jpg" alt="Tweet Image" class="tweet-image" />
+
+                            <!-- Footer goes back inside link -->
+                            <a href="https://x.com/Real_LSC/status/1956402552678834505" class="tweet-link">
+                                <div class="tweet-footer">
+                                    <span>10 AM&nbsp;&nbsp;08 15 25</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- TWT #13 -->
+                    <div class="tweet-container">
+                        <div class="tweet-card" data-date="2025-07-27T04:00:00">
+                            <a
+                                href="https://x.com/Real_LSC/status/1949609305424146712"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tweet-link">
+                                <!-- Tweet content -->
+                                <div class="tweet-header">
+                                    <img src="images/lscfilmslogo.png" alt="LSC Films Logo" class="tweet-avatar" />
+                                    <div class="tweet-user"><strong>Gabriel Chan</strong> <span>@Real_LSC</span></div>
+
+                                    <!-- X logo -->
+                                    <div class="tweet-x-logo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="black">
+                                            <path
+                                                d="M714.163 519.284L1160.89 0H1058.04L667.137 450.887L356.216 0H0L468.102 681.821L0 1226.37H102.846L515.561 748.68L843.784 1226.37H1200L714.137 519.284H714.163ZM567.594 687.828L521.378 621.505L140.973 79.6941H306.707L604.455 506.505L650.671 572.828L1058.07 1151.35H892.339L567.594 687.853V687.828Z"
+                                                fill="black"
+                                                stroke="black"
+                                                stroke-width="40" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Tweet image -->
+                                <img src="images/tweet-jul27.jpg" alt="Tweet Image" class="tweet-image" />
+
+                                <div class="tweet-footer">
+                                    <span>04 PM&nbsp;&nbsp;07 27 25</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- TWT #12 -->
+                    <div class="tweet-container">
+                        <div class="tweet-card" data-date="2025-07-13T12:00:00">
+                            <a
+                                href="https://x.com/Real_LSC/status/1944476763184353440"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tweet-link">
+                                <!-- Tweet content -->
+                                <div class="tweet-header">
+                                    <img src="images/lscfilmslogo.png" alt="LSC Films Logo" class="tweet-avatar" />
+                                    <div class="tweet-user"><strong>Gabriel Chan</strong> <span>@Real_LSC</span></div>
+
+                                    <!-- X logo -->
+                                    <div class="tweet-x-logo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="black">
+                                            <path
+                                                d="M714.163 519.284L1160.89 0H1058.04L667.137 450.887L356.216 0H0L468.102 681.821L0 1226.37H102.846L515.561 748.68L843.784 1226.37H1200L714.137 519.284H714.163ZM567.594 687.828L521.378 621.505L140.973 79.6941H306.707L604.455 506.505L650.671 572.828L1058.07 1151.35H892.339L567.594 687.853V687.828Z"
+                                                fill="black"
+                                                stroke="black"
+                                                stroke-width="40" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Tweet image -->
+                                <img src="images/tweet-jul13.jpg" alt="Tweet Image" class="tweet-image" />
+
+                                <div class="tweet-footer">
+                                    <span>12 PM&ensp;&ensp;07 13 25</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- TWT #11 -->
+                    <div class="tweet-container">
+                        <div class="tweet-card" data-date="2025-06-15T09:00:00">
+                            <a
+                                href="https://x.com/Real_LSC/status/1934280902856847626"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tweet-link">
+                                <!-- Tweet content -->
+                                <div class="tweet-header">
+                                    <img src="images/lscfilmslogo.png" alt="LSC Films Logo" class="tweet-avatar" />
+                                    <div class="tweet-user"><strong>Gabriel Chan</strong> <span>@Real_LSC</span></div>
+
+                                    <!-- X logo -->
+                                    <div class="tweet-x-logo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="black">
+                                            <path
+                                                d="M714.163 519.284L1160.89 0H1058.04L667.137 450.887L356.216 0H0L468.102 681.821L0 1226.37H102.846L515.561 748.68L843.784 1226.37H1200L714.137 519.284H714.163ZM567.594 687.828L521.378 621.505L140.973 79.6941H306.707L604.455 506.505L650.671 572.828L1058.07 1151.35H892.339L567.594 687.853V687.828Z"
+                                                fill="black"
+                                                stroke="black"
+                                                stroke-width="40" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Tweet caption (text area above the image) -->
+                                <div class="tweet-caption">
+                                    <p>VLT EP 03</p>
+                                </div>
+
+                                <!-- Tweet image -->
+                                <img src="images/tweet-jun15.jpg" alt="Tweet Image" class="tweet-image" />
+
+                                <div class="tweet-footer">
+                                    <span>09 AM&ensp;&ensp;06 15 25</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- TWT #10 -->
+                    <div class="tweet-container">
+                        <div class="tweet-card" data-date="2025-06-13T12:00:00">
+                            <a
+                                href="https://x.com/Real_LSC/status/1933596874436665525"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tweet-link">
+                                <!-- Tweet content -->
+                                <div class="tweet-header">
+                                    <img src="images/lscfilmslogo.png" alt="LSC Films Logo" class="tweet-avatar" />
+                                    <div class="tweet-user"><strong>Gabriel Chan</strong> <span>@Real_LSC</span></div>
+
+                                    <!-- X logo -->
+                                    <div class="tweet-x-logo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="black">
+                                            <path
+                                                d="M714.163 519.284L1160.89 0H1058.04L667.137 450.887L356.216 0H0L468.102 681.821L0 1226.37H102.846L515.561 748.68L843.784 1226.37H1200L714.137 519.284H714.163ZM567.594 687.828L521.378 621.505L140.973 79.6941H306.707L604.455 506.505L650.671 572.828L1058.07 1151.35H892.339L567.594 687.853V687.828Z"
+                                                fill="black"
+                                                stroke="black"
+                                                stroke-width="40" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <!-- Tweet image -->
+                                <img src="images/tweet-jun13.jpg" alt="Tweet Image" class="tweet-image" />
+
+                                <div class="tweet-footer">
+                                    <span>12 PM&ensp;&ensp;06 13 25</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- TWT #09 -->
+                    <div class="tweet-container">
+                        <div class="tweet-card" data-date="2025-01-13T10:00:00">
+                            <a
+                                href="https://x.com/Real_LSC/status/1879043809402818900"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tweet-link">
+                                <!-- Tweet content -->
+                                <div class="tweet-header">
+                                    <img src="images/lscfilmslogo.png" alt="LSC Films Logo" class="tweet-avatar" />
+                                    <div class="tweet-user"><strong>Gabriel Chan</strong> <span>@Real_LSC</span></div>
+
+                                    <!-- X logo -->
+                                    <div class="tweet-x-logo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="black">
+                                            <path
+                                                d="M714.163 519.284L1160.89 0H1058.04L667.137 450.887L356.216 0H0L468.102 681.821L0 1226.37H102.846L515.561 748.68L843.784 1226.37H1200L714.137 519.284H714.163ZM567.594 687.828L521.378 621.505L140.973 79.6941H306.707L604.455 506.505L650.671 572.828L1058.07 1151.35H892.339L567.594 687.853V687.828Z"
+                                                fill="black"
+                                                stroke="black"
+                                                stroke-width="40" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Tweet caption (text area above the image) -->
+                                <div class="tweet-caption">
+                                    <p>12.0</p>
+                                </div>
+
+                                <!-- Tweet image -->
+                                <img src="images/tweet-jan13(2).jpg" alt="Tweet Image" class="tweet-image" />
+
+                                <div class="tweet-footer">
+                                    <span>10 AM&ensp;&ensp;01 13 25</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- TWT #08 -->
+                    <div class="tweet-container">
+                        <div class="tweet-card" data-date="2025-01-13T04:00:00">
+                            <a
+                                href="https://x.com/Real_LSC/status/1933596874436665525"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tweet-link">
+                                <!-- Tweet content -->
+                                <div class="tweet-header">
+                                    <img src="images/lscfilmslogo.png" alt="LSC Films Logo" class="tweet-avatar" />
+                                    <div class="tweet-user"><strong>Gabriel Chan</strong> <span>@Real_LSC</span></div>
+
+                                    <!-- X logo -->
+                                    <div class="tweet-x-logo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="black">
+                                            <path
+                                                d="M714.163 519.284L1160.89 0H1058.04L667.137 450.887L356.216 0H0L468.102 681.821L0 1226.37H102.846L515.561 748.68L843.784 1226.37H1200L714.137 519.284H714.163ZM567.594 687.828L521.378 621.505L140.973 79.6941H306.707L604.455 506.505L650.671 572.828L1058.07 1151.35H892.339L567.594 687.853V687.828Z"
+                                                fill="black"
+                                                stroke="black"
+                                                stroke-width="40" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <!-- Tweet image -->
+                                <img src="images/tweet-jan13.jpg" alt="Tweet Image" class="tweet-image" />
+
+                                <div class="tweet-footer">
+                                    <span>04 PM&ensp;&ensp;01 13 25</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- TWT #07 -->
+                    <div class="tweet-container">
+                        <div class="tweet-card" data-date="2025-01-01T09:00:00">
+                            <a
+                                href="https://x.com/Real_LSC/status/1871631250668326935"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tweet-link">
+                                <!-- Tweet content -->
+                                <div class="tweet-header">
+                                    <img src="images/lscfilmslogo.png" alt="LSC Films Logo" class="tweet-avatar" />
+                                    <div class="tweet-user"><strong>Gabriel Chan</strong> <span>@Real_LSC</span></div>
+
+                                    <!-- X logo -->
+                                    <div class="tweet-x-logo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="black">
+                                            <path
+                                                d="M714.163 519.284L1160.89 0H1058.04L667.137 450.887L356.216 0H0L468.102 681.821L0 1226.37H102.846L515.561 748.68L843.784 1226.37H1200L714.137 519.284H714.163ZM567.594 687.828L521.378 621.505L140.973 79.6941H306.707L604.455 506.505L650.671 572.828L1058.07 1151.35H892.339L567.594 687.853V687.828Z"
+                                                fill="black"
+                                                stroke="black"
+                                                stroke-width="40" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Tweet caption (text area above the image) -->
+                                <div class="tweet-caption">
+                                    <p class="tweet-caption">THE VAULT</p>
+                                    <p>&ensp;</p>
+                                    <p class="tweet-caption">EPISODE 2</p>
+                                    <p>&ensp;</p>
+                                    <p class="tweet-caption">OUT NOW</p>
+                                </div>
+
+                                <!-- Tweet image -->
+                                <img src="images/tweet-jun15.jpg" alt="Tweet Image" class="tweet-image" />
+
+                                <div class="tweet-footer">
+                                    <span>09 AM&ensp;&ensp;01 01 25</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- TWT #06 -->
+
+                    <div class="tweet-container">
+                        <div class="tweet-card" data-date="2024-12-30T10:00:00">
+                            <!-- Link wraps ONLY header, captions, and footer -->
+                            <a
+                                href="https://x.com/Real_LSC/status/1873789519725814131"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tweet-link">
+                                <!-- Tweet header -->
+                                <div class="tweet-header">
+                                    <img src="images/lscfilmslogo.png" alt="LSC Films Logo" class="tweet-avatar" />
+                                    <div class="tweet-user"><strong>Gabriel Chan</strong> <span>@Real_LSC</span></div>
+
+                                    <!-- X logo -->
+                                    <div class="tweet-x-logo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="black">
+                                            <path
+                                                d="M714.163 519.284L1160.89 0H1058.04L667.137 450.887L356.216 0H0L468.102 681.821L0 1226.37H102.846L515.561 748.68L843.784 1226.37H1200L714.137 519.284H714.163ZM567.594 687.828L521.378 621.505L140.973 79.6941H306.707L604.455 506.505L650.671 572.828L1058.07 1151.35H892.339L567.594 687.853V687.828Z"
+                                                fill="black"
+                                                stroke="black"
+                                                stroke-width="40" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Tweet caption (above video) -->
+                                <p class="tweet-caption">"YOU ARE VIDEO-ED" ALLEGATION DEBUNKED</p>
+                                <p>&ensp;</p>
+                                <p class="tweet-caption">DO NOT BE FOOLED</p>
+                                <p>&ensp;</p>
+                                <p class="tweet-caption">WATCH NOW</p>
+                            </a>
+
+                            <!-- Tweet image -->
+                            <img src="images/media.jpg" alt="Tweet Image" class="tweet-image" />
+
+                            <!-- Footer goes back inside link -->
+                            <a href="https://x.com/Real_LSC/status/1956402552678834505" class="tweet-link">
+                                <div class="tweet-footer">
+                                    <span>10 AM&ensp;&ensp;12 30 24</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- TWT #05 -->
+                    <div class="tweet-container">
+                        <div class="tweet-card" data-date="2024-12-24T11:00:00">
+                            <a
+                                href="https://x.com/Real_LSC/status/1871631250668326935"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tweet-link">
+                                <!-- Tweet content -->
+                                <div class="tweet-header">
+                                    <img src="images/lscfilmslogo.png" alt="LSC Films Logo" class="tweet-avatar" />
+                                    <div class="tweet-user"><strong>Gabriel Chan</strong> <span>@Real_LSC</span></div>
+
+                                    <!-- X logo -->
+                                    <div class="tweet-x-logo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="black">
+                                            <path
+                                                d="M714.163 519.284L1160.89 0H1058.04L667.137 450.887L356.216 0H0L468.102 681.821L0 1226.37H102.846L515.561 748.68L843.784 1226.37H1200L714.137 519.284H714.163ZM567.594 687.828L521.378 621.505L140.973 79.6941H306.707L604.455 506.505L650.671 572.828L1058.07 1151.35H892.339L567.594 687.853V687.828Z"
+                                                fill="black"
+                                                stroke="black"
+                                                stroke-width="40" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Tweet caption (text area above the image) -->
+                                <div class="tweet-caption">
+                                    <p class="tweet-caption">THE VAULT</p>
+                                    <p>&ensp;</p>
+                                    <p class="tweet-caption">EPISODE 1</p>
+                                    <p>&ensp;</p>
+                                    <p class="tweet-caption">OUT NOW</p>
+                                </div>
+
+                                <!-- Tweet image -->
+                                <img src="images/tweet-jun15.jpg" alt="Tweet Image" class="tweet-image" />
+
+                                <div class="tweet-footer">
+                                    <span>11 AM&ensp;&ensp;12 24 24</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- TWT #04 -->
+                    <div class="tweet-container">
+                        <div class="tweet-card" data-date="2024-12-22T13:00:00">
+                            <a
+                                href="https://x.com/Real_LSC/status/1870937595456508413"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tweet-link">
+                                <!-- Tweet content -->
+                                <div class="tweet-header">
+                                    <img src="images/lscfilmslogo.png" alt="LSC Films Logo" class="tweet-avatar" />
+                                    <div class="tweet-user"><strong>Gabriel Chan</strong> <span>@Real_LSC</span></div>
+
+                                    <!-- X logo -->
+                                    <div class="tweet-x-logo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="black">
+                                            <path
+                                                d="M714.163 519.284L1160.89 0H1058.04L667.137 450.887L356.216 0H0L468.102 681.821L0 1226.37H102.846L515.561 748.68L843.784 1226.37H1200L714.137 519.284H714.163ZM567.594 687.828L521.378 621.505L140.973 79.6941H306.707L604.455 506.505L650.671 572.828L1058.07 1151.35H892.339L567.594 687.853V687.828Z"
+                                                fill="black"
+                                                stroke="black"
+                                                stroke-width="40" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <!-- Tweet image -->
+                                <img src="images/tweet-dec22.jpg" alt="Tweet Image" class="tweet-image" />
+
+                                <div class="tweet-footer">
+                                    <span>01 PM&ensp;&ensp;12 22 24</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- TWT #03 -->
+                    <div class="tweet-container">
+                        <div class="tweet-card" data-date="2024-08-04T10:00:00">
+                            <a
+                                href="https://x.com/Real_LSC/status/1820146821190070296"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tweet-link">
+                                <!-- Tweet content -->
+                                <div class="tweet-header">
+                                    <img src="images/lscfilmslogo.png" alt="LSC Films Logo" class="tweet-avatar" />
+                                    <div class="tweet-user"><strong>Gabriel Chan</strong> <span>@Real_LSC</span></div>
+
+                                    <!-- X logo -->
+                                    <div class="tweet-x-logo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="black">
+                                            <path
+                                                d="M714.163 519.284L1160.89 0H1058.04L667.137 450.887L356.216 0H0L468.102 681.821L0 1226.37H102.846L515.561 748.68L843.784 1226.37H1200L714.137 519.284H714.163ZM567.594 687.828L521.378 621.505L140.973 79.6941H306.707L604.455 506.505L650.671 572.828L1058.07 1151.35H892.339L567.594 687.853V687.828Z"
+                                                fill="black"
+                                                stroke="black"
+                                                stroke-width="40" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <!-- Tweet image -->
+                                <img src="images/tweet-aug4.jpg" alt="Tweet Image" class="tweet-image" />
+
+                                <div class="tweet-footer">
+                                    <span>10 AM&ensp;&ensp;08 04 24</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- TWT #02 -->
+                    <div class="tweet-container">
+                        <div class="tweet-card" data-date="2024-03-31T09:00:00">
+                            <a
+                                href="https://x.com/Real_LSC/status/1774473787444183552"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tweet-link">
+                                <!-- Tweet content -->
+                                <div class="tweet-header">
+                                    <img src="images/lscfilmslogo.png" alt="LSC Films Logo" class="tweet-avatar" />
+                                    <div class="tweet-user"><strong>Gabriel Chan</strong> <span>@Real_LSC</span></div>
+
+                                    <!-- X logo -->
+                                    <div class="tweet-x-logo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="black">
+                                            <path
+                                                d="M714.163 519.284L1160.89 0H1058.04L667.137 450.887L356.216 0H0L468.102 681.821L0 1226.37H102.846L515.561 748.68L843.784 1226.37H1200L714.137 519.284H714.163ZM567.594 687.828L521.378 621.505L140.973 79.6941H306.707L604.455 506.505L650.671 572.828L1058.07 1151.35H892.339L567.594 687.853V687.828Z"
+                                                fill="black"
+                                                stroke="black"
+                                                stroke-width="40" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Tweet caption (text area above the image) -->
+                                <div class="tweet-caption">
+                                    <p>SUMMER 2024</p>
+                                </div>
+
+                                <!-- Tweet image -->
+                                <img src="images/tweet-mar31.jpg" alt="Tweet Image" class="tweet-image" />
+
+                                <div class="tweet-footer">
+                                    <span>09 AM&ensp;&ensp;03 31 24</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- TWT #01 -->
+                    <div class="tweet-container">
+                        <div class="tweet-card" data-date="2023-03-09T09:00:00">
+                            <a
+                                href="https://x.com/Real_LSC/status/1774473787444183552"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tweet-link">
+                                <!-- Tweet content -->
+                                <div class="tweet-header">
+                                    <img src="images/lscfilmslogo.png" alt="LSC Films Logo" class="tweet-avatar" />
+                                    <div class="tweet-user"><strong>Gabriel Chan</strong> <span>@Real_LSC</span></div>
+
+                                    <!-- X logo -->
+                                    <div class="tweet-x-logo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="black">
+                                            <path
+                                                d="M714.163 519.284L1160.89 0H1058.04L667.137 450.887L356.216 0H0L468.102 681.821L0 1226.37H102.846L515.561 748.68L843.784 1226.37H1200L714.137 519.284H714.163ZM567.594 687.828L521.378 621.505L140.973 79.6941H306.707L604.455 506.505L650.671 572.828L1058.07 1151.35H892.339L567.594 687.853V687.828Z"
+                                                fill="black"
+                                                stroke="black"
+                                                stroke-width="40" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Tweet caption (text area above the image) -->
+                                <div class="tweet-caption">
+                                    <p>The return.</p>
+                                </div>
+
+                                <!-- Tweet image -->
+                                <img src="images/tweet-mar9.jpg" alt="Tweet Image" class="tweet-image" />
+
+                                <div class="tweet-footer">
+                                    <span>09 PM&ensp;&ensp;03 09 23</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- (other tweet cards follow with their data-date attributes) -->
+                <!-- Make sure every .tweet-card has data-date="YYYY-MM-DDTHH:MM:SS" if possible. -->
+                <!-- ... (rest of your tweet-container blocks) ... -->
+            </section>
+        </main>
+
+        <footer class="site-footer" role="contentinfo">
+            ⓒ LSC FILMS 2025
+            <div class="footer-links">
+                <a href="faq.html">FAQ</a>
+            </div>
+        </footer>
+
+        <script>
+            (function () {
+                const sortBox = document.getElementById("sortBox");
+                const sortLabel = document.getElementById("sortLabel");
+                const options = sortBox.querySelectorAll(".sort-answer div");
+                const tweetsWrapper = document.querySelector(".tweets");
+
+                if (!tweetsWrapper) return;
+
+                // Toggle open/close like FAQ
+                sortBox.querySelector(".sort-question").addEventListener("click", (e) => {
+                    sortBox.classList.toggle("open");
+                });
+
+                // Close when clicking outside
+                document.addEventListener("click", (e) => {
+                    if (!sortBox.contains(e.target)) sortBox.classList.remove("open");
+                });
+
+                function getCardDate(container) {
+                    // Prefer data-date on .tweet-card
+                    const card = container.querySelector(".tweet-card");
+                    if (card && card.dataset && card.dataset.date) {
+                        const d = new Date(card.dataset.date);
+                        if (!isNaN(d)) return d;
+                    }
+
+                    // Fallback: parse footer text (MM DD YY at end)
+                    const footerSpan = container.querySelector(".tweet-footer span");
+                    if (!footerSpan) return new Date(0);
+                    const txt = footerSpan.textContent.trim();
+                    const m = txt.match(/(\d{1,2})\s+(\d{1,2})\s+(\d{2,4})\s*$/);
+                    if (m) {
+                        let month = parseInt(m[1], 10);
+                        let day = parseInt(m[2], 10);
+                        let year = parseInt(m[3], 10);
+                        if (year < 100) year += 2000;
+                        return new Date(year, month - 1, day);
+                    }
+                    return new Date(0);
+                }
+
+                function sortTweets(type) {
+                    const cards = Array.from(tweetsWrapper.querySelectorAll(".tweet-container"));
+                    cards.sort((a, b) => {
+                        const da = getCardDate(a).getTime();
+                        const db = getCardDate(b).getTime();
+                        return type === "newest" ? db - da : da - db;
+                    });
+                    cards.forEach((c) => tweetsWrapper.appendChild(c));
+                }
+
+                // Wire options
+                options.forEach((opt) => {
+                    opt.addEventListener("click", (e) => {
+                        const sortType = e.currentTarget.dataset.sort;
+                        sortLabel.textContent = e.currentTarget.textContent;
+                        sortBox.classList.remove("open");
+                        sortTweets(sortType);
+                    });
+                });
+
+                // Default sort on load (newest first)
+                sortTweets("newest");
+            })();
+
+            const logoToggle = document.querySelector(".nav-toggle");
+            const navList = document.querySelector(".nav-list");
+            logoToggle.addEventListener("click", (e) => {
+                e.preventDefault();
+                navList.classList.toggle("open");
+            });
+        </script>
+        <script src="login.js"></script>
+    </body>
+</html>
