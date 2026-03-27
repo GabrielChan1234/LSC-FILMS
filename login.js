@@ -58,7 +58,7 @@ const loginHTML = `
   <div class="login-screen" id="loginScreen">
     <div class="login-box">
       <img src="images/lscfilmslogo.png" alt="LSC Logo" />
-      <input type="text" id="username" placeholder="USER ID" autocomplete="off" />
+      <input type="text" id="username" placeholder="USER ID" autocomplete="off" enterkeyhint="go" />
       <button id="loginBtn">+</button>
       <div class="error" id="errorMsg"></div>
     </div>
@@ -115,5 +115,11 @@ btn.addEventListener("click", () => {
     errorMsg.textContent = "INCORRECT USER ID";
     input.value = "";
     input.focus();
+  }
+});
+
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    btn.click(); // triggers the same login logic
   }
 });
