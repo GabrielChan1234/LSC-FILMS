@@ -102,6 +102,33 @@ body {
   height: 100%;
   border: 0;
 }
+    
+/* --- MOBILE: REMOVE PHONE FRAME --- */
+@media (max-width: 768px) {
+  .phone-frame {
+    display: none;
+  }
+
+  .phone-wrapper {
+    width: 100vw;
+    height: 100vh;
+    aspect-ratio: auto;
+  }
+
+  .phone-screen {
+    position: relative;
+
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .yews {
+    font-size: 14px; /* optional: slightly bigger for phone readability */
+  }
+}    
+    
 </style>
 </head>
 
@@ -140,7 +167,7 @@ body {
 
 <div class="video-overlay" id="videoOverlay">
   <iframe
-    src="https://youtu.be/Q5yV25_s97I"
+    src="https://www.youtube.com/embed/Q5yV25_s97I?si=J28wxYA1IDkqgXJO"
     title="PREVIEW 3"
     allow="autoplay; encrypted-media"
     allowfullscreen>
