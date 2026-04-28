@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>LSC ARCHIVE</title>
+
+<style>
+body {
+  margin: 0;
+  background: #FFFFFF;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- PHONE WRAPPER --- */
+.phone-wrapper {
+  position: relative;
+  width: 740px;
+  height: 740px;
+}
+
+/* phone image */
+.phone-frame {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* --- SCREEN AREA --- */
+.phone-screen {
+  position: absolute;
+
+  top: 17%;
+  left: 18%;
+  width: 64%;
+  height: 66%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- THIS IS THE FIX --- */
+.yews {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;  /* vertical centering inside content box */
+  align-items: center;      /* horizontal centering */
+
+  text-align: center;       /* IMPORTANT */
+  color: black;
+  font-size: 12px;
+
+  width: 100%;
+  height: 100%;
+}
+
+/* remove spacing issues */
+.yews h1 {
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin: 0 0 20px 0;
+}
+
+.entry {
+  margin-bottom: 18px;
+}
+
+.link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* video */
+.video-overlay {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.video-overlay iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="phone-wrapper">
+
+  <img src="images/PHONE-TEMP.png" class="phone-frame" />
+
+  <div class="phone-screen">
+
+    <div class="yews">
+      <h3>LSC FILMS</h3>
+
+      <div class="entry">
+        <p>JOHN REEVES: CHAPTER 3</p>
+        <p>DIRECTOR'S CUT</p>
+        <p>06 06 26</p>
+        <p class="link" id="openTrailer">ACCESS FILE</p>
+      </div>
+
+      <div class="entry">
+        <p>DIRECTED BY GABRIEL CHAN</p>
+      </div>
+
+      <div class="entry">
+        <p>STARRING GABRIEL CHAN</p>
+        <p>AND</p>
+        <p>RAFAEL CHAN</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="video-overlay" id="videoOverlay">
+  <iframe
+    src="https://youtu.be/Q5yV25_s97I"
+    title="PREVIEW 3"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
+</div>
+
+<script>
+const btn = document.getElementById("openTrailer");
+const overlay = document.getElementById("videoOverlay");
+
+btn.addEventListener("click", () => {
+  overlay.style.display = "flex";
+});
+
+overlay.addEventListener("click", () => {
+  overlay.style.display = "none";
+});
+</script>
+
+</body>
+</html>
