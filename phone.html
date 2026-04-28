@@ -18,11 +18,17 @@ body {
   align-items: center;
 }
 
-/* --- PHONE WRAPPER --- */
+/* --- RESPONSIVE PHONE WRAPPER FIX --- */
 .phone-wrapper {
   position: relative;
-  width: 740px;
-  height: 740px;
+
+  /* KEY FIX: responsive scaling instead of fixed size */
+  width: min(740px, 92vw);
+  aspect-ratio: 1 / 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* phone image */
@@ -30,6 +36,7 @@ body {
   width: 100%;
   height: 100%;
   display: block;
+  object-fit: contain;
 }
 
 /* --- SCREEN AREA --- */
@@ -46,15 +53,16 @@ body {
   align-items: center;
 }
 
-/* --- THIS IS THE FIX --- */
+/* text */
 .yews {
   display: flex;
   flex-direction: column;
 
-  justify-content: center;  /* vertical centering inside content box */
-  align-items: center;      /* horizontal centering */
+  justify-content: center;
+  align-items: center;
 
-  text-align: center;       /* IMPORTANT */
+  text-align: center;
+
   color: black;
   font-size: 12px;
 
@@ -62,8 +70,7 @@ body {
   height: 100%;
 }
 
-/* remove spacing issues */
-.yews h1 {
+.yews h3 {
   font-size: 12px;
   letter-spacing: 2px;
   margin: 0 0 20px 0;
@@ -106,7 +113,7 @@ body {
   <div class="phone-screen">
 
     <div class="yews">
-      <h3>LSC FILMS</h3>
+      <h2>LSC FILMS</h2>
 
       <div class="entry">
         <p>JOHN REEVES: CHAPTER 3</p>
