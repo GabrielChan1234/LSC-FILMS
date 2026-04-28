@@ -22,8 +22,9 @@ body {
 .phone-wrapper {
   position: relative;
 
-  /* KEY FIX: responsive scaling instead of fixed size */
-  width: min(740px, 92vw);
+  /* KEY FIX: scale based on viewport height too */
+  width: min(740px, 92vw, 92vh);
+
   aspect-ratio: 1 / 1;
 
   display: flex;
