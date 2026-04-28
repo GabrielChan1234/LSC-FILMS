@@ -1,191 +1,283 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>LSC ARCHIVE</title>
+        <link rel="stylesheet" href="styles.css" />
 
-<title>LSC ARCHIVE</title>
+        <style>
+            body {
+                margin: 0;
+                background: #ffffff;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 
-<style>
-body {
-  margin: 0;
-  background: #FFFFFF;
-  font-family: Arial, Helvetica, sans-serif;
-  height: 100vh;
+            /* PHONE WRAPPER */
+            .phone-wrapper {
+                position: relative;
+                width: min(740px, 92vw, 92vh);
+                aspect-ratio: 1 / 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+            /* PHONE IMAGE (IMPORTANT FIX: cannot block clicks) */
+            .phone-frame {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                z-index: 1;
+                pointer-events: none; /* FIX: image cannot block clicks */
+            }
 
-/* --- RESPONSIVE PHONE WRAPPER FIX --- */
-.phone-wrapper {
-  position: relative;
+            /* SCREEN */
+            .phone-screen {
+                position: absolute;
+                top: 17%;
+                left: 18%;
+                width: 64%;
+                height: 66%;
 
-  /* KEY FIX: scale based on viewport height too */
-  width: min(740px, 92vw, 92vh);
+                display: flex;
+                justify-content: center;
+                align-items: center;
 
-  aspect-ratio: 1 / 1;
+                z-index: 2;
+            }
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+            /* TEXT AREA */
+            .yews {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
 
-/* phone image */
-.phone-frame {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: contain;
-}
+                color: black;
+                font-size: 12px;
 
-/* --- SCREEN AREA --- */
-.phone-screen {
-  position: absolute;
+                width: 150%;
+                height: 100%;
+                z-index: 3;
+            }
 
-  top: 17%;
-  left: 18%;
-  width: 64%;
-  height: 66%;
+            .yews h2 {
+                font-size: 12px;
+                letter-spacing: 2px;
+                margin: 0 0 10px 0;
+            }
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+            .entry {
+                margin-bottom: 18px;
+            }
 
-/* text */
-.yews {
-  display: flex;
-  flex-direction: column;
+            /* LINKS */
+            .link {
+                cursor: pointer;
+                text-decoration: none;
+                position: relative;
+                display: inline-block;
+            }
 
-  justify-content: center;
-  align-items: center;
+            /* BRACKET HOVER EFFECT (FIXED) */
+            .link::before,
+            .link::after {
+                opacity: 0;
+                transition: 0.15s ease;
+                position: relative;
+            }
 
-  text-align: center;
+            .link::before {
+                content: "[ ";
+            }
 
-  color: black;
-  font-size: 12px;
+            .link::after {
+                content: " ]";
+            }
 
-  width: 100%;
-  height: 100%;
-}
+            .link:hover::before,
+            .link:hover::after {
+                opacity: 1;
+            }
 
-.yews h3 {
-  font-size: 12px;
-  letter-spacing: 2px;
-  margin: 0 0 20px 0;
-}
+            /* BACK LINK */
+            .back-link {
+                cursor: pointer;
+                text-decoration: none;
+            }
 
-.entry {
-  margin-bottom: 18px;
-}
+            /* VIDEO */
+            .video-overlay {
+                position: fixed;
+                inset: 0;
+                background: black;
+                display: none;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+            }
 
-.link {
-  text-decoration: underline;
-  cursor: pointer;
-}
+            .video-overlay iframe {
+                width: 100%;
+                height: 100%;
+                border: 0;
+            }
 
-/* video */
-.video-overlay {
-  position: fixed;
-  inset: 0;
-  background: black;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-}
+            /* MOBILE */
+            @media (max-width: 768px) {
+                .phone-frame {
+                    display: none;
+                }
 
-.video-overlay iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-    
-/* --- MOBILE: REMOVE PHONE FRAME --- */
-@media (max-width: 768px) {
-  .phone-frame {
-    display: none;
-  }
+                .phone-wrapper {
+                    width: 100vw;
+                    height: 100vh;
+                    aspect-ratio: auto;
+                }
 
-  .phone-wrapper {
-    width: 100vw;
-    height: 100vh;
-    aspect-ratio: auto;
-  }
+                .phone-screen {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
 
-  .phone-screen {
-    position: relative;
+                .yews {
+                    font-size: 14px;
+                }
+            }
 
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
+            img {
+                -webkit-user-drag: none;
+                user-select: none;
+                -webkit-touch-callout: none;
+            }
 
-  .yews {
-    font-size: 14px; /* optional: slightly bigger for phone readability */
-  }
-}    
-    
-</style>
-</head>
+            .link {
+                color: black;
+                text-decoration: none;
+            }
 
-<body>
+            /* visited link (this is what turns it purple) */
+            .link:visited {
+                color: black;
+            }
 
-<div class="phone-wrapper">
+            /* optional: hover stays clean too */
+            .link:hover {
+                color: black;
+            }
 
-  <img src="images/PHONE-TEMP.png" class="phone-frame" />
+            #backToText {
+                font-size: 12px; /* smaller text */
+                letter-spacing: 0px;
+            }
+        </style>
+    </head>
 
-  <div class="phone-screen">
+    <body>
+        <div class="phone-wrapper">
+            <img src="images/PHONE-TEMP.png" class="phone-frame" draggable="false" oncontextmenu="return false;" />
 
-    <div class="yews">
-      <h2>LSC FILMS</h2>
+            <div class="phone-screen">
+                <!-- TEXT VIEW -->
+                <div class="yews" id="textView">
+                    <img src="images/lscfilmslogo.png" alt="Logo" class="brand-logo" />
+                    <h3>&nbsp;</h3>
 
-      <div class="entry">
-        <p>JOHN REEVES: CHAPTER 3</p>
-        <p>DIRECTOR'S CUT</p>
-        <p>06 06 26</p>
-        <p class="link" id="openTrailer">ACCESS FILE</p>
-      </div>
+                    <div class="entry">
+                        <p>JOHN REEVES: CHAPTER 3</p>
+                        <p>&nbsp;</p>
+                        <p>DIRECTOR'S CUT</p>
+                        <p>&nbsp;</p>
+                        <p>06 06 26</p>
+                        <p>&nbsp;</p>
+                        <p>DIRECTED BY GABRIEL CHAN</p>
+                        <p>&nbsp;</p>
 
-      <div class="entry">
-        <p>DIRECTED BY GABRIEL CHAN</p>
-      </div>
+                        <p class="link" id="openTrailer"><b>ACCESS FILE</b></p>
+                        <p>&nbsp;</p>
+                        <a class="link back-link" href="index.html"><b>HOME</b></a>
+                    </div>
+                </div>
 
-      <div class="entry">
-        <p>STARRING GABRIEL CHAN</p>
-        <p>AND</p>
-        <p>RAFAEL CHAN</p>
-      </div>
-    </div>
+                <!-- VIDEO VIEW -->
+                <div
+                    class="video-view"
+                    id="videoView"
+                    style="
+                        display: none;
+                        width: 100%;
+                        height: 100%;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 12px;
+                    ">
+                    <iframe
+                        width="50%"
+                        height="25%"
+                        src="https://www.youtube.com/embed/oEcLgfU-ZYk"
+                        title="video1"
+                        allowfullscreen>
+                    </iframe>
 
-  </div>
+                    <iframe
+                        width="50%"
+                        height="25%"
+                        src="https://www.youtube.com/embed/Geg_6jggJ2Q"
+                        title="video2"
+                        allowfullscreen>
+                    </iframe>
 
-</div>
+                    <iframe
+                        width="50%"
+                        height="25%"
+                        src="https://www.youtube.com/embed/Q5yV25_s97I"
+                        title="video3"
+                        allowfullscreen>
+                    </iframe>
 
-<div class="video-overlay" id="videoOverlay">
-  <iframe
-    src="https://www.youtube.com/embed/Q5yV25_s97I?si=J28wxYA1IDkqgXJO"
-    title="PREVIEW 3"
-    allow="autoplay; encrypted-media"
-    allowfullscreen>
-  </iframe>
-</div>
+                    <p class="link" id="backToText"><b>BACK</b></p>
+                </div>
+            </div>
+        </div>
 
-<script>
-const btn = document.getElementById("openTrailer");
-const overlay = document.getElementById("videoOverlay");
+        <div class="video-overlay" id="videoOverlay">
+            <iframe
+                src="https://www.youtube.com/embed/Q5yV25_s97I?si=J28wxYA1IDkqgXJO"
+                title="PREVIEW 3"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
 
-btn.addEventListener("click", () => {
-  overlay.style.display = "flex";
-});
+        <script>
+            const btn = document.getElementById("openTrailer");
 
-overlay.addEventListener("click", () => {
-  overlay.style.display = "none";
-});
-</script>
+            const textView = document.getElementById("textView");
+            const videoView = document.getElementById("videoView");
 
-</body>
+            const backBtn = document.getElementById("backToText");
+
+            // OPEN VIDEO ARCHIVE
+            btn.addEventListener("click", () => {
+                textView.style.display = "none";
+                videoView.style.display = "flex";
+            });
+
+            // BACK TO TEXT VIEW
+            backBtn.addEventListener("click", () => {
+                videoView.style.display = "none";
+                textView.style.display = "flex";
+            });
+        </script>
+    </body>
 </html>
