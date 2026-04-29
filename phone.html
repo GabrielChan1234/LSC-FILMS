@@ -201,10 +201,13 @@
                         <p>&nbsp;</p>
                         <p>DIRECTED BY GABRIEL CHAN</p>
                         <p>&nbsp;</p>
-
-                        <p class="link" id="openTrailer"><b>ACCESS FILE</b></p>
+                        <p class="link" id="openTrailer"><b>ACCESS FILES</b></p>
                         <p>&nbsp;</p>
                         <a class="link back-link" href="index.html"><b>HOME</b></a>
+                    </div>
+                    <div id="countdown" style="margin-top: 20px; font-size: 12px">
+                        <span id="days"></span>D <span id="hours"></span>H <span id="minutes"></span>M
+                        <span id="seconds"></span>S
                     </div>
                 </div>
 
@@ -278,6 +281,37 @@
                 videoView.style.display = "none";
                 textView.style.display = "flex";
             });
+        </script>
+
+        <script>
+            const targetDate = new Date("June 6, 2026 09:00:00").getTime();
+
+            function format(num) {
+                return num < 10 ? "0" + num : num;
+            }
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                if (distance <= 0) {
+                    document.getElementById("countdown").innerHTML = "RELEASED";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((distance / (1000 * 60)) % 60);
+                const seconds = Math.floor((distance / 1000) % 60);
+
+                document.getElementById("days").innerText = format(days);
+                document.getElementById("hours").innerText = format(hours);
+                document.getElementById("minutes").innerText = format(minutes);
+                document.getElementById("seconds").innerText = format(seconds);
+            }
+
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
         </script>
     </body>
 </html>
