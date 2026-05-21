@@ -225,7 +225,7 @@ body {
 
 .gif-img {
   width: 500px;
-  height: 250px;
+  height: 300px;
   object-fit: contain; /* keeps aspect ratio */
 }
 
