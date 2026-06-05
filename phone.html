@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>LSC ARCHIVE</title>
+        <title>LSC FILMS SITE</title>
         <link rel="stylesheet" href="styles.css" />
 
         <style>
@@ -262,6 +262,11 @@
             </iframe>
         </div>
 
+        <!-- BACKGROUND MUSIC -->
+        <audio id="bgMusic" autoplay loop>
+            <source src="images/SONG.mp3" type="audio/mpeg" />
+        </audio>
+
         <script>
             const btn = document.getElementById("openTrailer");
 
@@ -312,6 +317,18 @@
 
             setInterval(updateCountdown, 1000);
             updateCountdown();
+        </script>
+
+        <script>
+            const music = document.getElementById("bgMusic");
+
+            document.addEventListener(
+                "click",
+                () => {
+                    music.play();
+                },
+                { once: true }
+            );
         </script>
     </body>
 </html>
